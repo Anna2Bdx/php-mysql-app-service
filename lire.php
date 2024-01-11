@@ -6,6 +6,7 @@
 
     function getTemp()
     {
+        echo ("on est entré dans la fonction");
         //Establish the connection
         $conn = mysqli_init();
         mysqli_ssl_set($conn,NULL,NULL,$sslcert,NULL,NULL);
