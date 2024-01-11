@@ -41,6 +41,7 @@
             
         }
 
+        $res = mysqli_query($conn, "DROP TABLE Temperatures");
 
         $res = mysqli_query($conn, "SHOW TABLES LIKE 'Temperatures'");
     
@@ -55,7 +56,7 @@
         }
 
         if ($stmt = mysqli_prepare($conn, "INSERT INTO Temperatures (dateYMD, temperatures, humidity) VALUES (?, ?, ?)")) {
-            mysqli_stmt_bind_param($stmt, '20240111', 26, 42);
+            mysqli_stmt_bind_param($stmt, '20240111', '26.4', '42.0');
             mysqli_stmt_execute($stmt);
             if (mysqli_stmt_affected_rows($stmt) == 0) {
                 echo "<h2>Catalog update failed.</h2>";
