@@ -1,8 +1,9 @@
 <?php
     echo ("hello world!");
-    /*require "database/config.php";
+    require "database/config.php";
     $request_method = $_SERVER["REQUEST_METHOD"];
-
+    echo("on est au moins là");
+/*
     function getTemp()
     {
         //Establish the connection
