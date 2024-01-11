@@ -3,7 +3,7 @@
     require "database/config.php";
     $request_method = $_SERVER["REQUEST_METHOD"];
     echo("on est au moins là");
-/*
+
     function getTemp()
     {
         //Establish the connection
@@ -22,7 +22,7 @@
         header('Content-Type: application/json');
         echo json_encode($response, JSON_PRETTY_PRINT);
     }
-
+/*
     switch($request_method)
     {
         case 'GET':
