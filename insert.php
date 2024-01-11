@@ -41,22 +41,24 @@
             
         }
 
-        $res = mysqli_query($conn, "DROP TABLE Temperatures");
+        //$res = mysqli_query($conn, "DROP TABLE Temperatures");
 
+        echo "<h2>On passe à la suite.</h2>";
         $res = mysqli_query($conn, "SHOW TABLES LIKE 'Temperatures'");
-    
+        echo "<h2>La requête de d'accès à la table a été faite</h2>";
+
         if (mysqli_num_rows($res) <= 0) {
             //Create table if it does not exist
             //print("la table n'existe pas, on demande la création.")
             $sql = file_get_contents("database/schema_final.sql");
             if(!mysqli_query($conn, $sql)){
-                die('Table températures Failed');
+                echo 'Table températures Failed';
                 //print('la création de la table a échoué');
             } else {
-                die('Table créée');
+                echo 'Table créée';
             }
         } else {
-            die('Table existante');
+            echo 'Table existante';
         }
 
         $res = mysqli_query($conn, "INSERT INTO Temperatures (dateYMD, temperature, humidity) VALUES ('20240111', '26.4', '42.0')");
