@@ -1,11 +1,12 @@
 <?php
     echo ("hello world!");
-    require "database/config.php";
+    
     $request_method = $_SERVER["REQUEST_METHOD"];
     echo("on est au moins là");
 
     function getTemp()
     {
+        require "database/config.php";
         echo ("on est entré dans la fonction");
         //Establish the connection
         $conn = mysqli_init();
