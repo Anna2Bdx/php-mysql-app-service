@@ -12,8 +12,7 @@
         $conn = mysqli_init();
         mysqli_ssl_set($conn,NULL,NULL,$sslcert,NULL,NULL);
         if(!mysqli_real_connect($conn, $host, $username, $password, $db_name, 3306, MYSQLI_CLIENT_SSL)){
-            //die('Failed to connect to MySQL: '.mysqli_connect_error());
-            echo("on n'a pas réussi à se connecter à la base");
+            die('Failed to connect to MySQL: '.mysqli_connect_error());
         }
         $query = "SELECT * FROM Temperatures";
         $response = array();
@@ -23,8 +22,8 @@
         {
             $response[] = $row;
         }
-        //header('Content-Type: application/json');
-        //echo json_encode($response, JSON_PRETTY_PRINT);
+        header('Content-Type: application/json');
+        echo json_encode($response, JSON_PRETTY_PRINT);
     }
 
     switch($request_method)
