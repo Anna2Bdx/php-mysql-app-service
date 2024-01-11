@@ -3,17 +3,6 @@
     require "database/config.php";
     $request_method = $_SERVER["REQUEST_METHOD"];
 
-    switch($request_method)
-    {
-        case 'GET':
-            getTemp();
-            break;
-        default:
-            // Requête invalide
-            header("HTTP/1.0 405 Method Not Allowed");
-            break;
-    }
-
     function getTemp()
     {
         //Establish the connection
@@ -32,4 +21,17 @@
         header('Content-Type: application/json');
         echo json_encode($response, JSON_PRETTY_PRINT);
     }
+
+    switch($request_method)
+    {
+        case 'GET':
+            getTemp();
+            break;
+        default:
+            // Requête invalide
+            header("HTTP/1.0 405 Method Not Allowed");
+            break;
+    }
+
+    
 ?>
