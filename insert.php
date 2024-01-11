@@ -43,7 +43,7 @@
 
         $res = mysqli_query($conn, "DROP TABLE Temperatures");
 
-        /*$res = mysqli_query($conn, "SHOW TABLES LIKE 'Temperatures'");
+        $res = mysqli_query($conn, "SHOW TABLES LIKE 'Temperatures'");
     
         if (mysqli_num_rows($res) <= 0) {
             //Create table if it does not exist
@@ -55,6 +55,7 @@
             }
         }
 
+        /*
         if ($stmt = mysqli_prepare($conn, "INSERT INTO Temperatures (dateYMD, temperatures, humidity) VALUES (?, ?, ?)")) {
             mysqli_stmt_bind_param($stmt, '20240111', '26.4', '42.0');
             mysqli_stmt_execute($stmt);
