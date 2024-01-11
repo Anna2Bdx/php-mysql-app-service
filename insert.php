@@ -46,14 +46,16 @@
     
         if (mysqli_num_rows($res) <= 0) {
             //Create table if it does not exist
+            print("la table n'existe pas, on demande la création.")
             $sql = file_get_contents("database/schema.sql");
             if(!mysqli_query($conn, $sql)){
                 die('Table Creation Failed');
+                print('la création de la table a échoué');
             }
         }
 
-        if ($stmt = mysqli_prepare($conn, "INSERT INTO Temperatures (dateYMD, temperatures, humidity) VALUES (?, ?)")) {
-            mysqli_stmt_bind_param($stmt, 'sd', "20240111", 26, 42);
+        if ($stmt = mysqli_prepare($conn, "INSERT INTO Temperatures (dateYMD, temperatures, humidity) VALUES (?, ?, ?)")) {
+            mysqli_stmt_bind_param($stmt, '20240111', 26, 42);
             mysqli_stmt_execute($stmt);
             if (mysqli_stmt_affected_rows($stmt) == 0) {
                 echo "<h2>Catalog update failed.</h2>";
