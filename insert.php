@@ -48,7 +48,7 @@
         if (mysqli_num_rows($res) <= 0) {
             //Create table if it does not exist
             //print("la table n'existe pas, on demande la création.")
-            $sql = file_get_contents("database/schema.sql");
+            $sql = file_get_contents("database/schema_final.sql");
             if(!mysqli_query($conn, $sql)){
                 die('Table Creation Failed');
                 //print('la création de la table a échoué');
