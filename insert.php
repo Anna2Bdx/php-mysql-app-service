@@ -43,7 +43,7 @@
 
         $res = mysqli_query($conn, "DROP TABLE Temperatures");
 
-        $res = mysqli_query($conn, "SHOW TABLES LIKE 'Temperatures'");
+        /*$res = mysqli_query($conn, "SHOW TABLES LIKE 'Temperatures'");
     
         if (mysqli_num_rows($res) <= 0) {
             //Create table if it does not exist
@@ -66,7 +66,7 @@
             }
             mysqli_stmt_close($stmt);
             
-        }
+        }*/
 
         //Close the connection
         mysqli_close($conn);
