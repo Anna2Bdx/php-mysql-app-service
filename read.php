@@ -36,6 +36,29 @@
         }
     }
 
+    //Test if table exists
+    $res = mysqli_query($conn, "SHOW TABLES LIKE 'Temperatures'");
+
+    if (mysqli_num_rows($res) <= 0) {
+        echo "<h2>La table températures nexiste pas</h2>";
+    } else {
+        //Query and print data
+        $res = mysqli_query($conn, 'SELECT * FROM Temperatures');
+
+        if (mysqli_num_rows($res) <= 0) {
+            echo "<h2>La Table des températures est vide.</h2>";
+        }
+        else {
+            echo "<table> <tr align=\"left\"> <th> Day </th> <th> Temperatures </th> <th> Humidity </th> </tr>";
+            while ($row = mysqli_fetch_assoc($res)) {
+                echo "<tr align=\"left\"> <td> ".$row["dateYMD"]." </td>";
+                echo "<td> ".$row["temperature"]." </td>";
+                echo "<td> ".$row["humidity"]." </td> </tr>";
+            }
+            echo "</table>";
+        }
+    }
+
     //Close the connection
     mysqli_close($conn);
 

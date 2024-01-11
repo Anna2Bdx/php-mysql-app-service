@@ -41,6 +41,19 @@
             
         }
 
+        if ($stmt = mysqli_prepare($conn, "INSERT INTO Temperatures (dateYMD, temperatures, humidity) VALUES (?, ?)")) {
+            mysqli_stmt_bind_param($stmt, 'sd', "20240111", 26, 42);
+            mysqli_stmt_execute($stmt);
+            if (mysqli_stmt_affected_rows($stmt) == 0) {
+                echo "<h2>Catalog update failed.</h2>";
+            }
+            else {
+                echo "<h2>Température mise à jour</h2>";
+            }
+            mysqli_stmt_close($stmt);
+            
+        }
+
         //Close the connection
         mysqli_close($conn);
 
