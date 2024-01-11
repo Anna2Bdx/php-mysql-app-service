@@ -1,6 +1,6 @@
 <?php
-
-    require "database/config.php";
+    echo ("hello world!");
+    /*require "database/config.php";
     $request_method = $_SERVER["REQUEST_METHOD"];
 
     function getTemp()
@@ -32,6 +32,6 @@
             header("HTTP/1.0 405 Method Not Allowed");
             break;
     }
-
+*/
     
 ?>
