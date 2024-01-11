@@ -1,13 +1,13 @@
 <?php
-    echo ("hello world!");
+    //echo ("hello world!");
     
     $request_method = $_SERVER["REQUEST_METHOD"];
-    echo("on est au moins là");
+    //echo("on est au moins là");
 
     function getTemp()
     {
         require "database/config.php";
-        echo ("on est entré dans la fonction");
+        //echo ("on est entré dans la fonction");
         //Establish the connection
         $conn = mysqli_init();
         mysqli_ssl_set($conn,NULL,NULL,$sslcert,NULL,NULL);
@@ -16,7 +16,7 @@
         }
         $query = "SELECT * FROM Temperatures";
         $response = array();
-        echo("on balance la requête");
+        //echo("on balance la requête");
         $result = mysqli_query($conn, $query);
         while($row = mysqli_fetch_array($result))
         {
@@ -29,7 +29,7 @@
     switch($request_method)
     {
         case 'GET':
-            echo ("on a bien reconnu la demande de GET");
+            //echo ("on a bien reconnu la demande de GET");
             getTemp();
             break;
         default:
