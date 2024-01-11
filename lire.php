@@ -22,17 +22,18 @@
         header('Content-Type: application/json');
         echo json_encode($response, JSON_PRETTY_PRINT);
     }
-/*
+
     switch($request_method)
     {
         case 'GET':
-            getTemp();
+            echo ("on a bien reconnu la demande de GET");
+            //getTemp();
             break;
         default:
             // Requête invalide
             header("HTTP/1.0 405 Method Not Allowed");
             break;
     }
-*/
+
     
 ?>
