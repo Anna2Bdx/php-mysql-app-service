@@ -22,18 +22,20 @@
             echo "$name: $value\n";
         }*/
 
+        // récupération du header pour l'authentification
+        /// TODO : passer la valeur de la clé en paramètre global dans la solution
         foreach (getallheaders() as $name => $value) { 
-            if ($name=="Authent" && $value=="123") {
+            if ($name=="Authent" && $value==$auth_key) {
                 $auth=true;
                 break;
             }
         } 
 
         if ($auth) {
+            // réupération du paramètre passé dans l'URL pour le GET
             $date = $_GET["dateYMD"];
             $query = "SELECT * FROM Temperatures where dateYMD=".$date;
             $response = array();
-            //echo("on balance la requête");
             $result = mysqli_query($conn, $query);
             while($row = mysqli_fetch_array($result))
             {
@@ -58,16 +60,17 @@
         if(!mysqli_real_connect($conn, $host, $username, $password, $db_name, 3306, MYSQLI_CLIENT_SSL)){
             die('Failed to connect to MySQL: '.mysqli_connect_error());
         }
+        $idMaison = $_POST["idMaison"];
 		$dateYMD = $_POST["dateYMD"];
 		$temp = $_POST["temp"];
 		$humi = $_POST["humi"];
 		
-		echo $query="INSERT INTO Temperatures( dateYMD, temperature, humidity) VALUES('".$dateYMD."', '".$temp."', '".$humi."')";
+		echo $query="INSERT INTO Temperatures( idMaison, dateYMD, temperature, humidity) VALUES(".$idMaison.", '".$dateYMD."', '".$temp."', '".$humi."')";
 		if(mysqli_query($conn, $query))
 		{
 			$response=array(
 				'status' => 1,
-				'status_message' =>'Donnée ajoutée avec succès.'
+				'status_message' =>'Data successfully added.'
 			);
 		}
 		else
