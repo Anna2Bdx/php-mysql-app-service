@@ -47,7 +47,9 @@
                 );
             }
             header('Content-Type: application/json');
-            echo json_encode($response, JSON_PRETTY_PRINT);    
+            echo ('{"measures":');
+            echo json_encode($response, JSON_PRETTY_PRINT);  
+            echo ('}');  
         } else {
             header('Content-Type: text/plain');
             http_response_code(204);
