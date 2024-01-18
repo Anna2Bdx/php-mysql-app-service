@@ -16,7 +16,8 @@
         }
 
         if ($_GET["key"]=="abc") {
-            $query = "SELECT * FROM Temperatures";
+            $date = $_GET["dateYMD"];
+            $query = "SELECT * FROM Temperatures where dateYMD=".$date;
             $response = array();
             //echo("on balance la requête");
             $result = mysqli_query($conn, $query);
