@@ -14,16 +14,23 @@
         if(!mysqli_real_connect($conn, $host, $username, $password, $db_name, 3306, MYSQLI_CLIENT_SSL)){
             die('Failed to connect to MySQL: '.mysqli_connect_error());
         }
-        $query = "SELECT * FROM Temperatures";
-        $response = array();
-        //echo("on balance la requête");
-        $result = mysqli_query($conn, $query);
-        while($row = mysqli_fetch_array($result))
-        {
-            $response[] = $row;
+
+        if ($_GET("key")=="abc") {
+            $query = "SELECT * FROM Temperatures";
+            $response = array();
+            //echo("on balance la requête");
+            $result = mysqli_query($conn, $query);
+            while($row = mysqli_fetch_array($result))
+            {
+                $response[] = $row;
+            }
+            header('Content-Type: application/json');
+            echo json_encode($response, JSON_PRETTY_PRINT);    
+        } else {
+            header('Content-Type: text/plain');
+            http_response_code(204);
+            echo "wrong authentication";
         }
-        header('Content-Type: application/json');
-        echo json_encode($response, JSON_PRETTY_PRINT);
     }
 
     function addTemp()
@@ -36,11 +43,11 @@
         if(!mysqli_real_connect($conn, $host, $username, $password, $db_name, 3306, MYSQLI_CLIENT_SSL)){
             die('Failed to connect to MySQL: '.mysqli_connect_error());
         }
-		$date = $_POST["dateYMD"];
+		$dateYMD = $_POST["dateYMD"];
 		$temp = $_POST["temp"];
 		$humi = $_POST["humi"];
 		
-		echo $query="INSERT INTO Temperatures( dateYMD, temperature, humidity) VALUES('".$date."', '".$temp."', '".$humi."')";
+		echo $query="INSERT INTO Temperatures( dateYMD, temperature, humidity) VALUES('".$dateYMD."', '".$temp."', '".$humi."')";
 		if(mysqli_query($conn, $query))
 		{
 			$response=array(
@@ -75,5 +82,28 @@
             break;
     }
 
-    
+    /* 
+    /!\ penser à ajouter l'ID de maison dans toutes les routes et les structures de tables !!
+    to do pour la partie Histo :
+    - ajouter la création de la table si elle n'existe pas déjà dans le post (au bon format)
+    - garder une page de visualisation des données
+    - essayer de supprimer les doublons dans le code json_encode
+    - ne renvoyer que les 12 derniers mois dans le Get (mais complet dans la page de visualisation)
+    - faire en sorte que la structure de la table corresponde à ce que l'on attend (similaire au format actuel)
+    - faire en sorte que l'insertion corresonde en terme de format
+    - enlever tout ce qui sert à rien
+    - mettre ce code dans un git privé beaucoup plus propre
+    - redéployer une stack complète et déployer ce code
+    - faire une reprise d'historique à partir du json !!
+    - ajouter une route dans l'API monitoring qui pointe vers ces routes (au moins pour la lecture)
+    to do pour la partie intra day :
+    - faire un nouveau fichier php
+    - faire une structure de table qui corresponde
+    - faire une route d'insertion
+    - faire une route de calcul (nouveau fichier pour calculer les moyennes)
+    - faire une route de lecture
+    - faire une route de truncate table
+    - faire une page de visualisation
+    idem pour la partie unknown, logs, alarmes
+    */
 ?>
