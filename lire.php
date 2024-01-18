@@ -16,9 +16,11 @@
         }
 
         $auth = false;
+       
+        /* // debug
         foreach (getallheaders() as $name => $value) {
             echo "$name: $value\n";
-        }
+        }*/
 
         foreach (getallheaders() as $name => $value) { 
             if ($name=="Authent" && $value=="123") {
