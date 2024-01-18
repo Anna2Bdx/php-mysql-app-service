@@ -39,7 +39,12 @@
             $result = mysqli_query($conn, $query);
             while($row = mysqli_fetch_array($result))
             {
-                $response[] = $row;
+                //$response[] = $row;
+                $response[] = array(
+                    'maison' => $row['idMaison'],
+                    'date' => $row['dateYMD'],
+                    'avgT' => $row['temperature']
+                );
             }
             header('Content-Type: application/json');
             echo json_encode($response, JSON_PRETTY_PRINT);    
