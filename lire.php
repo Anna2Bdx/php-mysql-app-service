@@ -15,7 +15,7 @@
             die('Failed to connect to MySQL: '.mysqli_connect_error());
         }
 
-        if ($_GET("key")=="abc") {
+        if ($_GET["key"]=="abc") {
             $query = "SELECT * FROM Temperatures";
             $response = array();
             //echo("on balance la requête");
