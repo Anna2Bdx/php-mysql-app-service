@@ -15,7 +15,14 @@
             die('Failed to connect to MySQL: '.mysqli_connect_error());
         }
 
-        if ($_GET["key"]=="abc") {
+        $auth = false;
+        foreach (getallheaders() as $name => $value) { 
+            if ($name=="key" && $value=="123") {
+                $auth=true;
+            }
+        } 
+
+        if ($auth) {
             $date = $_GET["dateYMD"];
             $query = "SELECT * FROM Temperatures where dateYMD=".$date;
             $response = array();
