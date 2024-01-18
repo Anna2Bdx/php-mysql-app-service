@@ -65,8 +65,8 @@
 		$temp = $_POST["temp"];
 		$humi = $_POST["humi"];
 		
-		echo $query="INSERT INTO Temperatures( idMaison, dateYMD, dateYear, dateMonth, dateDay, temperature, humidity) VALUES(".$idMaison.", '".$dateYMD."', ".left($dateYMD,4).", ".right(left($dateYMD,6),2).", ".right($dateYMD,2).", ".$temp.", ".$humi.")";
-		/*if(mysqli_query($conn, $query))
+		echo $query="INSERT INTO Temperatures( idMaison, dateYMD, dateYear, dateMonth, dateDay, temperature, humidity) VALUES(".$idMaison.", '".$dateYMD."', ".substr($dateYMD,0,4).", ".substr($dateYMD,4,2).", ".substr($dateYMD,-2).", ".$temp.", ".$humi.")";
+		if(mysqli_query($conn, $query))
 		{
 			$response=array(
 				'status' => 1,
@@ -81,7 +81,7 @@
 			);
 		}
 		header('Content-Type: application/json');
-		echo json_encode($response);*/
+		echo json_encode($response);
 	}
 
     switch($request_method)
