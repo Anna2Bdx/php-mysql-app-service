@@ -103,7 +103,6 @@
     /* 
     /!\ penser à ajouter l'ID de maison dans toutes les routes et les structures de tables !!
     to do pour la partie Histo :
-    - ajouter la création de la table si elle n'existe pas déjà dans le post (au bon format)
     - garder une page de visualisation des données
     - essayer de supprimer les doublons dans le code json_encode
     - ne renvoyer que les 12 derniers mois dans le Get (mais complet dans la page de visualisation)
