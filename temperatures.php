@@ -65,7 +65,7 @@
 		$temp = $_POST["temp"];
 		$humi = $_POST["humi"];
 		
-		echo $query="INSERT INTO Temperatures( idMaison, dateYMD, temperature, humidity) VALUES(".$idMaison.", '".$dateYMD."', '".$temp."', '".$humi."')";
+		echo $query="INSERT INTO Temperatures( idMaison, dateYMD, temperature, humidity) VALUES(".$idMaison.", '".$dateYMD."', ".$temp.", ".$humi.")";
 		if(mysqli_query($conn, $query))
 		{
 			$response=array(

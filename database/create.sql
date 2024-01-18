@@ -1,0 +1,1 @@
+CREATE TABLE Temperatures ( idMaison TINYINT NOT NULL, dateYMD VARCHAR(50) NOT NULL, temperature DECIMAL(4,2), humidity DECIMAL(4,2) );

@@ -1,5 +1,5 @@
 <?php
-    echo ("Starting SQL Script assessment");
+    echo ("Starting SQL Script assessment \n");
     
     $request_method = $_SERVER["REQUEST_METHOD"];
     //echo("on est au moins là");
@@ -7,7 +7,7 @@
     function applyScript()
     {
         require "database/config.php";
-        echo ("GET method detected");
+        echo ("GET method detected \n");
         //Establish the connection
         $conn = mysqli_init();
         mysqli_ssl_set($conn,NULL,NULL,$sslcert,NULL,NULL);
@@ -27,7 +27,7 @@
         foreach (getallheaders() as $name => $value) { 
             if ($name=="Authent" && $value==$auth_key) {
                 $auth=true;
-                echo ("Authentication success");
+                echo ("Authentication success \n");
                 break;
             }
         } 
@@ -39,9 +39,9 @@
             // execute script if exists
             $sql = file_get_contents("database/".$script.".sql");
             if(!mysqli_query($conn, $sql)){
-                die('Script execution failed');
+                die('Script execution failed \n');
             }
-            echo ("Script executed successfully.");
+            echo ("Script executed successfully. \n");
         }
          else {
             header('Content-Type: text/plain');
