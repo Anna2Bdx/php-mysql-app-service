@@ -15,9 +15,13 @@
             die('Failed to connect to MySQL: '.mysqli_connect_error());
         }
 
-        $auth = false;
+        $auth = true;
+        foreach (getallheaders() as $name => $value) {
+            echo "$name: $value\n";
+        }
+
         foreach (getallheaders() as $name => $value) { 
-            if ($name=="key" && $value=="123") {
+            if ($name=="authent" && $value=="123") {
                 $auth=true;
             }
         } 
