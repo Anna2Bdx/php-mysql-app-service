@@ -44,7 +44,7 @@
             switch($mode) {
                 case 1: 
                     // affichage des 30 dernier jours
-                    $query = "SELECT * FROM Temperatures where idMaison=".$maison." ORDER BY dateYMD DESC LIMIT 30";
+                    $query = "SELECT * FROM (SELECT * FROM Temperatures where idMaison=".$maison." ORDER BY dateYMD DESC LIMIT 30) ORDER BY dateYMD ASC";
                     break;
                 case 2:
                     // affichage d'un point par mois (avec calcul de la moyenne des moyennes, du min et du max)
