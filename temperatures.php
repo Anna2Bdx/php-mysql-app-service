@@ -126,7 +126,6 @@
     /* 
     /!\ penser à ajouter l'ID de maison dans toutes les routes et les structures de tables !!
     to do pour la partie Histo :
-    - ajouter le paramètre maison dans l'appel (1 si non valorisé)
     - ajouter plusieurs modes (dernier mois, 1 valeur par mois (moyenne), avec ALL si non valorisé)
     - valider les paramètres d'appel du GET et du POST
     - mettre ce code dans un git privé beaucoup plus propre
