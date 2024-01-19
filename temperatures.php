@@ -44,7 +44,7 @@
             switch($mode) {
                 case 1: 
                     // affichage des 30 dernier jours
-                    $query = "SELECT top 30 * FROM Temperatures where idMaison=".$maison." order by dateYMD desc";
+                    $query = "SELECT * FROM Temperatures where idMaison=".$maison." ORDER BY dateYMD DESC LIMIT 30";
                     break;
                 default:
                     // affichage de toutes les data
