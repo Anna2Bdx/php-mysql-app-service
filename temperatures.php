@@ -97,6 +97,7 @@
         foreach (getallheaders() as $name => $value) { 
             if ($name=="Authent" && $value==$auth_key) {
                 $auth=true;
+                echo("Authentication success \n");
                 break;
             }
         } 
@@ -120,7 +121,7 @@
             $avgH = $_POST["avgH"];
             
             
-            echo $query="INSERT INTO Temperatures( idMaison, dateYMD, dateYear, dateMonth, dateDay, minT, maxT, avgT, minH, maxH, avgH) VALUES(".$idMaison.", '".$dateYMD."', ".substr($dateYMD,0,4).", ".substr($dateYMD,5,2).", ".substr($dateYMD,-2).", ".$minT.", ".$maxT.", ".$avgT.", ".$minH.", ".$maxH.", ".$avgH." )";
+            echo $query="INSERT INTO Temperatures( idMaison, dateYMD, dateYear, dateMonth, dateDay, minT, maxT, avgT, minH, maxH, avgH) VALUES(".$idMaison.", '".$dateYMD."', ".substr($dateYMD,0,4).", ".substr($dateYMD,5,2).", ".substr($dateYMD,-2).", ".$minT.", ".$maxT.", ".$avgT.", ".$minH.", ".$maxH.", ".$avgH." ) \n";
             if(mysqli_query($conn, $query))
             {
                 $response=array(
