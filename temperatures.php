@@ -85,41 +85,63 @@
 
     function addTemp()
 	{
-		require "database/config.php";
-        //echo ("on est entré dans la fonction");
-        //Establish the connection
-        $conn = mysqli_init();
-        mysqli_ssl_set($conn,NULL,NULL,$sslcert,NULL,NULL);
-        if(!mysqli_real_connect($conn, $host, $username, $password, $db_name, 3306, MYSQLI_CLIENT_SSL)){
-            die('Failed to connect to MySQL: '.mysqli_connect_error());
+        $auth = false;
+       
+        /* // debug
+        foreach (getallheaders() as $name => $value) {
+            echo "$name: $value\n";
+        }*/
+
+        // récupération du header pour l'authentification
+        /// TODO : passer la valeur de la clé en paramètre global dans la solution
+        foreach (getallheaders() as $name => $value) { 
+            if ($name=="Authent" && $value==$auth_key) {
+                $auth=true;
+                break;
+            }
+        } 
+
+        if ($auth) {
+            require "database/config.php";
+            //echo ("on est entré dans la fonction");
+            //Establish the connection
+            $conn = mysqli_init();
+            mysqli_ssl_set($conn,NULL,NULL,$sslcert,NULL,NULL);
+            if(!mysqli_real_connect($conn, $host, $username, $password, $db_name, 3306, MYSQLI_CLIENT_SSL)){
+                die('Failed to connect to MySQL: '.mysqli_connect_error());
+            }
+            $idMaison = $_POST["idMaison"];
+            $dateYMD = $_POST["dateYMD"];
+            $minT = $_POST["minT"];
+            $maxT = $_POST["maxT"];
+            $avgT = $_POST["avgT"];
+            $minH = $_POST["minH"];
+            $maxH = $_POST["maxH"];
+            $avgH = $_POST["avgH"];
+            
+            
+            echo $query="INSERT INTO Temperatures( idMaison, dateYMD, dateYear, dateMonth, dateDay, minT, maxT, avgT, minH, maxH, avgH) VALUES(".$idMaison.", '".$dateYMD."', ".substr($dateYMD,0,4).", ".substr($dateYMD,5,2).", ".substr($dateYMD,-2).", ".$minT.", ".$maxT.", ".$avgT.", ".$minH.", ".$maxH.", ".$avgH." )";
+            if(mysqli_query($conn, $query))
+            {
+                $response=array(
+                    'status' => 1,
+                    'status_message' =>'Data successfully added.'
+                );
+            }
+            else
+            {
+                $response=array(
+                    'status' => 0,
+                    'status_message' =>'ERREUR!.'. mysqli_error($conn)
+                );
+            }
+            header('Content-Type: application/json');
+            echo json_encode($response);
+        } else {
+            header('Content-Type: text/plain');
+            http_response_code(204);
+            echo "wrong authentication";
         }
-        $idMaison = $_POST["idMaison"];
-		$dateYMD = $_POST["dateYMD"];
-		$minT = $_POST["minT"];
-        $maxT = $_POST["maxT"];
-        $avgT = $_POST["avgT"];
-        $minH = $_POST["minH"];
-        $maxH = $_POST["maxH"];
-        $avgH = $_POST["avgH"];
-		
-		
-		echo $query="INSERT INTO Temperatures( idMaison, dateYMD, dateYear, dateMonth, dateDay, minT, maxT, avgT, minH, maxH, avgH) VALUES(".$idMaison.", '".$dateYMD."', ".substr($dateYMD,0,4).", ".substr($dateYMD,5,2).", ".substr($dateYMD,-2).", ".$minT.", ".$maxT.", ".$avgT.", ".$minH.", ".$maxH.", ".$avgH." )";
-		if(mysqli_query($conn, $query))
-		{
-			$response=array(
-				'status' => 1,
-				'status_message' =>'Data successfully added.'
-			);
-		}
-		else
-		{
-			$response=array(
-				'status' => 0,
-				'status_message' =>'ERREUR!.'. mysqli_error($conn)
-			);
-		}
-		header('Content-Type: application/json');
-		echo json_encode($response);
 	}
 
     switch($request_method)
@@ -141,12 +163,7 @@
     /* 
     /!\ penser à ajouter l'ID de maison dans toutes les routes et les structures de tables !!
     to do pour la partie Histo :
-    - Modes de lecture :
-        Un mode ALL (par défaut)
-        Un mode les 30 derniers jours enregistrés
-        Un mode 1 point par mois (avec calcul de la moyenne group by "year/month")
-    - ajouter plusieurs modes (dernier mois, 1 valeur par mois (moyenne), avec ALL si non valorisé)
-    - valider les paramètres d'appel du GET et du POST
+    - valider les paramètres d'appel du POST
     - mettre ce code dans un git privé beaucoup plus propre
     - redéployer une stack complète et déployer ce code
     - ajouter une route dans l'API monitoring qui pointe vers ces routes (au moins pour la lecture)
@@ -157,7 +174,6 @@
     - faire une route de calcul (nouveau fichier pour calculer les moyennes)
     - faire une route de lecture
     - faire une route de truncate table
-    - faire une page de visualisation
     idem pour la partie unknown, logs, alarmes
     */
 ?>
