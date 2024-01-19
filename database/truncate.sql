@@ -1,1 +1,1 @@
-TRUNCATE TABLE Temperatures;
+TRUNCATE TABLE Logs;

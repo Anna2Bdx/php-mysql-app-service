@@ -1,1 +1,1 @@
-drop TABLE Temperatures;
+drop TABLE Logs;
