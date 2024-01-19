@@ -1,6 +1,6 @@
 INSERT INTO Temperatures ( idMaison, dateYMD, dateYear, dateMonth, dateDay, minT, maxT, avgT, minH, maxH, avgH) VALUES(1, '2023-03-10', 2023, 03, 10, 24.6, 24.6, 24.6, 48, 48, 48 );
-/*INSERT INTO Temperatures ( idMaison, dateYMD, dateYear, dateMonth, dateDay, minT, maxT, avgT, minH, maxH, avgH) VALUES(1, '2023-03-11', 2023, 03, 11, 24.3, 24.9, 24.51, 48, 51, 49.58 );
-INSERT INTO Temperatures ( idMaison, dateYMD, dateYear, dateMonth, dateDay, minT, maxT, avgT, minH, maxH, avgH) VALUES(1, '2023-03-12', 2023, 03, 12, 24.7, 25.5, 25.03, 46, 51, 47.16 );
+INSERT INTO Temperatures ( idMaison, dateYMD, dateYear, dateMonth, dateDay, minT, maxT, avgT, minH, maxH, avgH) VALUES(1, '2023-03-11', 2023, 03, 11, 24.3, 24.9, 24.51, 48, 51, 49.58 );
+/*INSERT INTO Temperatures ( idMaison, dateYMD, dateYear, dateMonth, dateDay, minT, maxT, avgT, minH, maxH, avgH) VALUES(1, '2023-03-12', 2023, 03, 12, 24.7, 25.5, 25.03, 46, 51, 47.16 );
 INSERT INTO Temperatures ( idMaison, dateYMD, dateYear, dateMonth, dateDay, minT, maxT, avgT, minH, maxH, avgH) VALUES(1, '2023-03-13', 2023, 03, 13, 24.9, 25.7, 25.24, 46, 55, 48.51 );
 INSERT INTO Temperatures ( idMaison, dateYMD, dateYear, dateMonth, dateDay, minT, maxT, avgT, minH, maxH, avgH) VALUES(1, '2023-03-14', 2023, 03, 14, 25.1, 25.6, 25.28, 43, 51, 44.52 );
 INSERT INTO Temperatures ( idMaison, dateYMD, dateYear, dateMonth, dateDay, minT, maxT, avgT, minH, maxH, avgH) VALUES(1, '2023-03-15', 2023, 03, 15, 25.1, 25.8, 25.32, 43, 50, 44.83 );
