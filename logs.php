@@ -63,7 +63,7 @@
                 //$response[] = $row;
                 $response[] = array(
                     'id' => (int)$row['id'],
-                    'maison' => $row['idMaison'],
+                    'maison' => (int)$row['idMaison'],
                     'TimeStamp' => $row['logtimestamp'],
                     'level' => (int)$row['loglevel'],
                     'content' => $row['logcontent']
