@@ -42,12 +42,13 @@
             $query = "";
             $mode = (int)$_GET["mode"];
             switch($mode) {
-                case 1:
+                case 1: 
+                    // affichage des 30 dernier jours
                     $query = "SELECT top 30 * FROM Temperatures where idMaison=".$maison." order by dateYMD desc";
                     break;
                 default:
-                    $date = $_GET["dateYMD"];
-                    $query = "SELECT * FROM Temperatures where dateYMD=".$date." and idMaison=".$maison;
+                    // affichage de toutes les data
+                    $query = "SELECT * FROM Temperatures where idMaison=".$maison;
                     break;
             }
             
