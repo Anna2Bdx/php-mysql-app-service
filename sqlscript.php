@@ -38,7 +38,7 @@
             
             // execute script if exists
             $sql = file_get_contents("database/".$script.".sql");
-            if(!mysqli_query($conn, $sql)){
+            if(!mysqli_multi_query($conn, $sql)){
                 die('Script execution failed \n');
             }
             echo ("Script executed successfully. \n");
