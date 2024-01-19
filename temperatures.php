@@ -94,7 +94,6 @@
         }*/
 
         // récupération du header pour l'authentification
-        /// TODO : passer la valeur de la clé en paramètre global dans la solution
         foreach (getallheaders() as $name => $value) { 
             if ($name=="Authent" && $value==$auth_key) {
                 $auth=true;
