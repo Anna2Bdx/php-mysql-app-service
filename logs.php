@@ -4,7 +4,7 @@
     $request_method = $_SERVER["REQUEST_METHOD"];
     //echo("on est au moins là");
 
-    function getTemp()
+    function getLogs()
     {
         require "database/config.php";
         //echo ("on est entré dans la fonction");
@@ -43,16 +43,16 @@
             $mode = (int)$_GET["mode"];
             switch($mode) {
                 case 1: 
-                    // affichage des 30 dernier jours
-                    $query = "SELECT * FROM (SELECT * FROM Temperatures where idMaison=".$maison." ORDER BY dateYMD DESC LIMIT 30) lastT ORDER BY dateYMD ASC";
+                    // affichage des 50 derniers logs
+                    $query = "SELECT * FROM (SELECT * FROM Logs where idMaison=".$maison." ORDER BY logtimestamp DESC LIMIT 50) lastT ORDER BY logtimestamp ASC";
                     break;
-                case 2:
-                    // affichage d'un point par mois (avec calcul de la moyenne des moyennes, du min et du max)
-                    $query = "SELECT MAX(idMaison) AS idMaison, MAX(dateYMD) AS dateYMD,AVG(minT) AS minT, AVG(maxT) AS maxT,AVG(avgT) AS avgT,AVG(minH) AS minH,AVG(maxH) AS maxH,AVG(avgH) AS avgH FROM Temperatures WHERE idMaison=".$maison." GROUP BY dateYear,WEEK(dateYMD)";
+                case 2 :
+                    // affichage des 50 derniers logs uniquement pour les logs de niveau 0 / majeurs
+                    $query = "SELECT * FROM (SELECT * FROM Logs where idMaison=".$maison." AND loglevel=0 ORDER BY logtimestamp DESC LIMIT 50) lastT ORDER BY logtimestamp ASC";
                     break;
                 default:
                     // affichage de toutes les data
-                    $query = "SELECT * FROM Temperatures where idMaison=".$maison;
+                    $query = "SELECT * FROM Logs where idMaison=".$maison;
                     break;
             }
             
@@ -62,20 +62,15 @@
             {
                 //$response[] = $row;
                 $response[] = array(
+                    'id' => (int)$row['id'],
                     'maison' => $row['idMaison'],
-                    'date' => $row['dateYMD'],
-                    'minT' => (float)$row['minT'],
-                    'maxT' => (float)$row['maxT'],
-                    'avgT' => (float)$row['avgT'],
-                    'minH' => (float)$row['minH'],
-                    'maxH' => (float)$row['maxH'],
-                    'avgH' => (float)$row['avgH']
+                    'TimeStamp' => $row['logtimestamp'],
+                    'level' => (int)$row['loglevel'],
+                    'content' => $row['logcontent']
                 );
             }
             header('Content-Type: application/json');
-            echo ('{"measures":');
-            echo json_encode($response, JSON_PRETTY_PRINT);  
-            echo ('}');  
+            echo json_encode($response, JSON_PRETTY_PRINT);    
         } else {
             header('Content-Type: text/plain');
             http_response_code(204);
@@ -83,7 +78,7 @@
         }
     }
 
-    function addTemp()
+    function addLogs()
 	{
         require "database/config.php";
         $auth = false;
@@ -111,21 +106,16 @@
                 die('Failed to connect to MySQL: '.mysqli_connect_error());
             }
             $idMaison = (int)$_POST["idMaison"];
-            $dateYMD = $_POST["dateYMD"];
-            $minT = (float)$_POST["minT"];
-            $maxT = (float)$_POST["maxT"];
-            $avgT = (float)$_POST["avgT"];
-            $minH = (float)$_POST["minH"];
-            $maxH = (float)$_POST["maxH"];
-            $avgH = (float)$_POST["avgH"];
+            $logtimestamp = $_POST["timestamp"];
+            $loglevel = (int) $_POST["level"];
+            $logcontent = $_POST["content"];
             
-            
-            echo $query="INSERT INTO Temperatures( idMaison, dateYMD, dateYear, dateMonth, dateDay, minT, maxT, avgT, minH, maxH, avgH) VALUES(".$idMaison.", '".$dateYMD."', ".substr($dateYMD,0,4).", ".substr($dateYMD,5,2).", ".substr($dateYMD,-2).", ".$minT.", ".$maxT.", ".$avgT.", ".$minH.", ".$maxH.", ".$avgH." ) \n";
+            echo $query="INSERT INTO Logs( idMaison, logtimestamp, loglevel, logcontent) VALUES(".$idMaison.", '".$logtimestamp."', ".$loglevel.", '".$logcontent."')";
             if(mysqli_query($conn, $query))
             {
                 $response=array(
                     'status' => 1,
-                    'status_message' =>'Data successfully added.'
+                    'status_message' =>'\n Data successfully added.'
                 );
             }
             else
@@ -148,11 +138,11 @@
     {
         case 'GET':
             //echo ("on a bien reconnu la demande de GET");
-            getTemp();
+            getLogs();
             break;
         case 'POST':
             //echo ("on a bien reconnu la demande de GET");
-            addTemp();
+            addLog();
             break;
         default:
             // Requête invalide
