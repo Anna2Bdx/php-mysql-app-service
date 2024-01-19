@@ -33,8 +33,14 @@
 
         if ($auth) {
             // réupération du paramètre passé dans l'URL pour le GET
+            if (isset($_GET["idMaison"])){
+                $maison = (int)$_GET["idMaison"];
+            } else {
+                $maison = 1;
+            }
+            
             $date = $_GET["dateYMD"];
-            $query = "SELECT * FROM Temperatures where dateYMD=".$date;
+            $query = "SELECT * FROM Temperatures where dateYMD=".$date." and idMaison=".$maison;
             $response = array();
             $result = mysqli_query($conn, $query);
             while($row = mysqli_fetch_array($result))
@@ -120,10 +126,9 @@
     /* 
     /!\ penser à ajouter l'ID de maison dans toutes les routes et les structures de tables !!
     to do pour la partie Histo :
-    - ne renvoyer que les 12 derniers mois dans le Get (30 derniers points, 1 point par mois, etc)
+    - ajouter le paramètre maison dans l'appel (1 si non valorisé)
+    - ajouter plusieurs modes (dernier mois, 1 valeur par mois (moyenne), avec ALL si non valorisé)
     - valider les paramètres d'appel du GET et du POST
-    - faire en sorte que la structure de la table corresponde à ce que l'on attend (similaire au format actuel)
-    - faire en sorte que l'insertion corresonde en terme de format
     - mettre ce code dans un git privé beaucoup plus propre
     - redéployer une stack complète et déployer ce code
     - faire une reprise d'historique à partir du json !!
