@@ -43,12 +43,12 @@
                 $response[] = array(
                     'maison' => $row['idMaison'],
                     'date' => $row['dateYMD'],
-                    'minT' => $row['minT'],
-                    'maxT' => $row['maxT'],
-                    'avgT' => $row['avgT'],
-                    'minH' => $row['minH'],
-                    'maxH' => $row['maxH'],
-                    'avgH' => $row['avgH']
+                    'minT' => (float)$row['minT'],
+                    'maxT' => (float)$row['maxT'],
+                    'avgT' => (float)$row['avgT'],
+                    'minH' => (float)$row['minH'],
+                    'maxH' => (float)$row['maxH'],
+                    'avgH' => (float)$row['avgH']
                 );
             }
             header('Content-Type: application/json');
