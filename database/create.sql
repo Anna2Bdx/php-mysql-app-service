@@ -1,4 +1,4 @@
-/*CREATE TABLE Temperatures ( 
+CREATE TABLE Temperatures ( 
     idMaison TINYINT NOT NULL, 
     dateYMD DATE NOT NULL, 
     dateYear SMALLINT NOT NULL, 
@@ -10,7 +10,7 @@
     minH DECIMAL(4,2),
     maxH DECIMAL(4,2),
     avgH DECIMAL(4,2) 
-    );*/
+    );
 
 CREATE TABLE Logs ( 
     id INT NOT NULL AUTO_INCREMENT, 
