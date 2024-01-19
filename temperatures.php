@@ -72,7 +72,7 @@
 		$temp = $_POST["temp"];
 		$humi = $_POST["humi"];
 		
-		echo $query="INSERT INTO Temperatures( idMaison, dateYMD, dateYear, dateMonth, dateDay, temperature, humidity) VALUES(".$idMaison.", '".$dateYMD."', ".substr($dateYMD,0,4).", ".substr($dateYMD,4,2).", ".substr($dateYMD,-2).", ".$temp.", ".$humi.")";
+		echo $query="INSERT INTO Temperatures( idMaison, dateYMD, dateYear, dateMonth, dateDay, temperature, humidity) VALUES(".$idMaison.", '".$dateYMD."', ".substr($dateYMD,0,4).", ".substr($dateYMD,5,2).", ".substr($dateYMD,-2).", ".$temp.", ".$humi.")";
 		if(mysqli_query($conn, $query))
 		{
 			$response=array(
@@ -110,12 +110,10 @@
     /* 
     /!\ penser à ajouter l'ID de maison dans toutes les routes et les structures de tables !!
     to do pour la partie Histo :
-    - garder une page de visualisation des données
-    - essayer de supprimer les doublons dans le code json_encode
-    - ne renvoyer que les 12 derniers mois dans le Get (mais complet dans la page de visualisation)
+    - ne renvoyer que les 12 derniers mois dans le Get (30 derniers points, 1 point par mois, etc)
+    - valider les paramètres d'appel du GET et du POST
     - faire en sorte que la structure de la table corresponde à ce que l'on attend (similaire au format actuel)
     - faire en sorte que l'insertion corresonde en terme de format
-    - enlever tout ce qui sert à rien
     - mettre ce code dans un git privé beaucoup plus propre
     - redéployer une stack complète et déployer ce code
     - faire une reprise d'historique à partir du json !!
