@@ -15,7 +15,7 @@
 CREATE TABLE Logs ( 
     id INT NOT NULL AUTO_INCREMENT, 
     idMaison TINYINT NOT NULL,
-    /*logtimestamp DATETIME NOT NULL, */
+    logtimestamp DATETIME NOT NULL, 
     loglevel TINYINT NOT NULL,
     logcontent VARCHAR(100),
     PRIMARY KEY (id)

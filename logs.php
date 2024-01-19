@@ -110,9 +110,8 @@
             $loglevel = (int) $_POST["level"];
             $logcontent = $_POST["content"];
             
-            echo("hello world");
 
-            /*echo $query="INSERT INTO Logs( idMaison, loglevel, logcontent) VALUES(".$idMaison.", ".$loglevel.", '".$logcontent."')";
+            echo $query="INSERT INTO Logs( idMaison, logtimestamp, loglevel, logcontent) VALUES(".$idMaison.", '".$logtimestamp."', ".$loglevel.", '".$logcontent."')";
             if(mysqli_query($conn, $query))
             {
                 $response=array(
@@ -128,7 +127,7 @@
                 );
             }
             header('Content-Type: application/json');
-            echo json_encode($response);*/
+            echo json_encode($response);
         } else {
             header('Content-Type: text/plain');
             http_response_code(204);
@@ -144,7 +143,7 @@
             break;
         case 'POST':
             //echo ("on a bien reconnu la demande de GET");
-            addLog();
+            addLogs();
             break;
         default:
             // Requête invalide
