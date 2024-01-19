@@ -87,10 +87,10 @@
 	{
         $auth = false;
        
-        /* // debug
+         // debug
         foreach (getallheaders() as $name => $value) {
             echo "$name: $value\n";
-        }*/
+        }
 
         // récupération du header pour l'authentification
         /// TODO : passer la valeur de la clé en paramètre global dans la solution
