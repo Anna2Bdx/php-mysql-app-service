@@ -110,8 +110,10 @@
             $loglevel = (int) $_POST["level"];
             $logcontent = $_POST["content"];
             
-            echo $query="INSERT INTO Logs( idMaison, loglevel, logcontent) VALUES(".$idMaison.", ".$loglevel.", '".$logcontent."')";
-            /*if(mysqli_query($conn, $query))
+            echo("hello world");
+
+            /*echo $query="INSERT INTO Logs( idMaison, loglevel, logcontent) VALUES(".$idMaison.", ".$loglevel.", '".$logcontent."')";
+            if(mysqli_query($conn, $query))
             {
                 $response=array(
                     'status' => 1,
