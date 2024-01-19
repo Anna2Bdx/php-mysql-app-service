@@ -39,8 +39,18 @@
                 $maison = 1;
             }
             
-            $date = $_GET["dateYMD"];
-            $query = "SELECT * FROM Temperatures where dateYMD=".$date." and idMaison=".$maison;
+            $query = "";
+            $mode = (int)$_GET["mode"];
+            switch($mode) {
+                case 1:
+                    $query = "SELECT top 30 * FROM Temperatures where idMaison=".$maison." order by dateYMD desc";
+                    break;
+                default:
+                    $date = $_GET["dateYMD"];
+                    $query = "SELECT * FROM Temperatures where dateYMD=".$date." and idMaison=".$maison;
+                    break;
+            }
+            
             $response = array();
             $result = mysqli_query($conn, $query);
             while($row = mysqli_fetch_array($result))
@@ -126,11 +136,14 @@
     /* 
     /!\ penser à ajouter l'ID de maison dans toutes les routes et les structures de tables !!
     to do pour la partie Histo :
+    - Modes de lecture :
+        Un mode ALL (par défaut)
+        Un mode les 30 derniers jours enregistrés
+        Un mode 1 point par mois (avec calcul de la moyenne group by "year/month")
     - ajouter plusieurs modes (dernier mois, 1 valeur par mois (moyenne), avec ALL si non valorisé)
     - valider les paramètres d'appel du GET et du POST
     - mettre ce code dans un git privé beaucoup plus propre
     - redéployer une stack complète et déployer ce code
-    - faire une reprise d'historique à partir du json !!
     - ajouter une route dans l'API monitoring qui pointe vers ces routes (au moins pour la lecture)
     to do pour la partie intra day :
     - faire un nouveau fichier php
