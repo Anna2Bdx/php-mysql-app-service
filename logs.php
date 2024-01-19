@@ -111,7 +111,7 @@
             $logcontent = $_POST["content"];
             
             echo $query="INSERT INTO Logs( idMaison, loglevel, logcontent) VALUES(".$idMaison.", ".$loglevel.", '".$logcontent."')";
-            if(mysqli_query($conn, $query))
+            /*if(mysqli_query($conn, $query))
             {
                 $response=array(
                     'status' => 1,
@@ -126,7 +126,7 @@
                 );
             }
             header('Content-Type: application/json');
-            echo json_encode($response);
+            echo json_encode($response);*/
         } else {
             header('Content-Type: text/plain');
             http_response_code(204);
