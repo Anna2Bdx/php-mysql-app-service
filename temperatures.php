@@ -48,7 +48,7 @@
                     break;
                 case 2:
                     // affichage d'un point par mois (avec calcul de la moyenne des moyennes, du min et du max)
-                    $query = "SELECT MAX(idMaison) AS idMaison, MAX(dateYMD) AS dateYMD,AVG(minT) AS minT, AVG(maxT) AS maxT,AVG(avgT) AS avgT,AVG(minH) AS minH,AVG(maxH) AS maxH,AVG(avgH) AS avgH FROM Temperatures WHERE idMaison=".$maison." GROUP BY dateYear, dateMonth";
+                    $query = "SELECT MAX(idMaison) AS idMaison, MAX(dateYMD) AS dateYMD,AVG(minT) AS minT, AVG(maxT) AS maxT,AVG(avgT) AS avgT,AVG(minH) AS minH,AVG(maxH) AS maxH,AVG(avgH) AS avgH FROM Temperatures WHERE idMaison=".$maison." GROUP BY WEEK(dateYMD)";
                     break;
                 default:
                     // affichage de toutes les data
