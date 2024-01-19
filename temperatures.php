@@ -74,8 +74,13 @@
         }
         $idMaison = $_POST["idMaison"];
 		$dateYMD = $_POST["dateYMD"];
-		$temp = $_POST["temp"];
-		$humi = $_POST["humi"];
+		$minT = $_POST["minT"];
+        $maxT = $_POST["maxT"];
+        $avgT = $_POST["avgT"];
+        $minH = $_POST["minH"];
+        $maxH = $_POST["maxH"];
+        $avgH = $_POST["avgH"];
+		
 		
 		echo $query="INSERT INTO Temperatures( idMaison, dateYMD, dateYear, dateMonth, dateDay, minT, maxT, avgT, minH, maxH, avgH) VALUES(".$idMaison.", '".$dateYMD."', ".substr($dateYMD,0,4).", ".substr($dateYMD,5,2).", ".substr($dateYMD,-2).", ".$minT.", ".$maxT.", ".$avgT.", ".$minH.", ".$maxH.", ".$avgH." )";
 		if(mysqli_query($conn, $query))
